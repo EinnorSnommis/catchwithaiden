@@ -947,6 +947,62 @@
   .field-row-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
   @media (max-width: 480px) { .field-row-3 { grid-template-columns: 1fr; gap: 0; } }
 
+  /* waiver */
+  .waiver-box {
+    border: 1px solid var(--line);
+    background: var(--bg-elev);
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+  .waiver-box summary {
+    cursor: pointer;
+    list-style: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--orange);
+    display: flex; align-items: center; gap: 8px;
+    min-height: 32px;
+  }
+  .waiver-box summary::-webkit-details-marker { display: none; }
+  .waiver-box summary::before { content: "+"; font-family: 'Bebas Neue', sans-serif; font-size: 18px; }
+  .waiver-box details[open] summary::before { content: "–"; }
+  .waiver-text {
+    max-height: 240px;
+    overflow-y: auto;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-top: 10px;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+  }
+  .waiver-text p { margin: 0 0 10px; }
+  .waiver-text ol { margin: 0 0 10px; padding-left: 20px; }
+  .waiver-text li { margin-bottom: 8px; }
+  .waiver-text b { color: var(--ink); }
+  .waiver-agree {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .waiver-agree input {
+    flex: none;
+    width: 22px; height: 22px;
+    margin: 1px 0 0;
+    accent-color: var(--orange);
+    cursor: pointer;
+  }
+  .waiver-agree b { color: var(--ink); }
+
   /* honeypot — visually gone, still in DOM for bots */
   .hp-field {
     position: absolute !important;
@@ -1523,6 +1579,28 @@
             <input type="email" id="fEmail" name="email" autocomplete="email" inputmode="email" maxlength="100" required>
           </div>
 
+          <div class="waiver-box" id="waiver">
+            <details>
+              <summary>Liability Waiver &amp; Release — tap to read</summary>
+              <div class="waiver-text">
+                <p><b>Catch With Aiden — Liability Waiver &amp; Release</b></p>
+                <p>In consideration of my child being permitted to participate in private baseball/catching instruction provided by Aiden Simmons ("Instructor"), I, the parent or legal guardian named in this booking, agree as follows:</p>
+                <ol>
+                  <li><b>Assumption of risk.</b> Baseball and catching instruction involve inherent risks — including but not limited to thrown and batted balls, collisions, falls, weather, and use of equipment — that can result in injury. I understand these risks and voluntarily accept them on behalf of my child.</li>
+                  <li><b>Release and hold harmless.</b> To the fullest extent permitted by law, I release, waive, and hold harmless Aiden Simmons and Catch With Aiden from any and all claims, demands, or causes of action arising out of or related to my child's participation in lessons, including those based on ordinary negligence. This release does not apply to gross negligence or willful misconduct.</li>
+                  <li><b>Physical condition.</b> I confirm my child is physically able to participate, and I will inform the Instructor of any medical conditions, allergies, or limitations before the first lesson.</li>
+                  <li><b>Emergency medical authorization.</b> If I am not present and my child requires emergency care, I authorize the Instructor to contact emergency services (911) and consent to emergency medical treatment for my child.</li>
+                  <li><b>Equipment and supervision.</b> My child will use appropriate protective equipment (helmet and catcher's gear) during drills that require it, and I will remain present at the lesson or immediately reachable at the phone number provided.</li>
+                </ol>
+                <p>Checking the agreement box and submitting this booking request is my electronic signature, given on the date of the request, and applies to the lesson booked and any rescheduled make-up of that lesson.</p>
+              </div>
+            </details>
+            <label class="waiver-agree">
+              <input type="checkbox" id="fWaiver">
+              <span>I am the <b>parent or legal guardian</b> and I have read and agree to the <b>Liability Waiver &amp; Release</b> above on behalf of my player. Checking this box is my electronic signature.</span>
+            </label>
+          </div>
+
           <!-- Honeypot: real people never see or fill this. Bots do. -->
           <div class="hp-field" aria-hidden="true">
             <label for="fWebsite">Website</label>
@@ -1904,6 +1982,11 @@ const BOOKING_API_URL = "REPLACE_WITH_APPS_SCRIPT_DEPLOYMENT_URL";
     if (!ageN || ageN < 5 || ageN > 18) { showFormError("Player age should be between 5 and 18."); return; }
     if (phone.replace(/\D/g, "").length < 10) { showFormError("That phone number looks too short."); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError("That email doesn't look right."); return; }
+    if (!$("fWaiver").checked) {
+      showFormError("Please read and agree to the Liability Waiver & Release — it's required to book.");
+      $("waiver").scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
 
     const payload = {
       parent: parent,
@@ -1913,6 +1996,7 @@ const BOOKING_API_URL = "REPLACE_WITH_APPS_SCRIPT_DEPLOYMENT_URL";
       email: email,
       date: state.selectedDate,
       time: state.selectedTime,
+      waiver: true,                  // checkbox is enforced above
       website: $("fWebsite").value   // honeypot
     };
 

@@ -14,7 +14,7 @@ Everything you need to put the site live and take bookings. No coding required �
 
 **How a booking works (the big picture)**
 
-1. A parent picks a date and time on the site and submits the form.
+1. A parent picks a date and time on the site, agrees to the **Liability Waiver & Release** (required checkbox — their electronic signature), and submits the form.
 2. The parent instantly gets an email: *"send $30 by Zelle or Cash App — your slot is held for 12 hours."*
 3. Aiden gets an email with the request and two buttons: **CONFIRM** and **DECLINE**.
 4. Aiden waits for the Zelle/Cash App payment notification on his phone. When it arrives, he taps **CONFIRM**.
@@ -134,6 +134,9 @@ The first booking automatically creates a Google Sheet called **"Catch With Aide
 
 - **status** — `PENDING` (waiting on payment), `CONFIRMED` (paid & on the calendar), `DECLINED`, or `EXPIRED` (never paid, slot released)
 - Parent/player names, age, phone, email, date, time
+- **waiver** — `AGREED` plus the exact timestamp the parent accepted the Liability Waiver & Release. Bookings can't be submitted without it, so this column is your signed-waiver record — don't delete rows.
+
+> **About the waiver:** the waiver text lives in `index.html` (search for "Liability Waiver"). It's a standard youth-sports assumption-of-risk and release, but it was not written by a lawyer — it's worth having a North Carolina attorney give it a five-minute read to make sure it holds up locally.
 
 You never need to edit the Sheet — it's the record book. But it's handy for looking up a parent's number.
 

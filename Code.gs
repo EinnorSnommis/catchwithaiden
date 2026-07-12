@@ -44,8 +44,8 @@ var CONFIG = {
   MAX_TOTAL_PER_HOUR: 20
 };
 
-var SHEET_HEADERS = ['id', 'timestamp', 'status', 'parent', 'player', 'age', 'phone', 'email', 'date', 'time', 'token'];
-var COL = { ID: 1, TIMESTAMP: 2, STATUS: 3, PARENT: 4, PLAYER: 5, AGE: 6, PHONE: 7, EMAIL: 8, DATE: 9, TIME: 10, TOKEN: 11 };
+var SHEET_HEADERS = ['id', 'timestamp', 'status', 'parent', 'player', 'age', 'phone', 'email', 'date', 'time', 'token', 'waiver'];
+var COL = { ID: 1, TIMESTAMP: 2, STATUS: 3, PARENT: 4, PLAYER: 5, AGE: 6, PHONE: 7, EMAIL: 8, DATE: 9, TIME: 10, TOKEN: 11, WAIVER: 12 };
 
 /* ═══════════════ ENTRY POINTS ═══════════════ */
 
@@ -65,6 +65,11 @@ function doPost(e) {
 
   // Honeypot: bots fill the hidden "website" field. Silently pretend success.
   if (data.website) return jsonOut_({ ok: true, message: 'Request received.' });
+
+  // Waiver agreement is mandatory — the front-end enforces it, so re-check here.
+  if (data.waiver !== true) {
+    return jsonOut_({ ok: false, error: 'You must agree to the Liability Waiver & Release to book.' });
+  }
 
   // ── sanitize + validate ──
   var parent = clean_(data.parent, 100);
@@ -106,7 +111,8 @@ function doPost(e) {
     }
     var id = Utilities.getUuid();
     var token = Utilities.getUuid();
-    sheet_().appendRow([id, new Date(), 'PENDING', parent, player, ageN, phone, email, date, time, token]);
+    var waiverStamp = 'AGREED ' + new Date().toISOString();
+    sheet_().appendRow([id, new Date(), 'PENDING', parent, player, ageN, phone, email, date, time, token, waiverStamp]);
 
     sendParentRequestEmail_(email, parent, player, date, time);
     sendAidenRequestEmail_(id, token, parent, player, ageN, phone, email, date, time);
@@ -325,6 +331,8 @@ function sendParentRequestEmail_(email, parent, player, date, time) {
     '<b>Include your player\'s name and the lesson date in the payment note.</b><br><br>' +
     'Your slot is held for ' + CONFIG.HOLD_HOURS + ' hours pending payment. Once Aiden confirms it, ' +
     'you\'ll get another email with the location and what to bring.<br><br>' +
+    'When you booked, you agreed to the Liability Waiver &amp; Release on behalf of your player — ' +
+    'you can re-read it any time at <a href="https://catchwithaiden.com/#waiver">catchwithaiden.com</a>.<br><br>' +
     'Questions? Text Aiden at (336) 508-2721.<br><br>— Catch With Aiden';
   MailApp.sendEmail({ to: email, subject: subject, htmlBody: body });
 }
@@ -341,7 +349,8 @@ function sendAidenRequestEmail_(id, token, parent, player, age, phone, email, da
     'Parent: ' + esc_(parent) + '<br>' +
     'Phone: ' + esc_(phone) + '<br>' +
     'Email: ' + esc_(email) + '<br>' +
-    'When: <b>' + when + '</b> · $' + CONFIG.PRICE + '<br><br>' +
+    'When: <b>' + when + '</b> · $' + CONFIG.PRICE + '<br>' +
+    'Waiver: <b>agreed at booking</b> (timestamp recorded in the Bookings sheet)<br><br>' +
     'Wait for the Zelle / Cash App notification, then:<br><br>' +
     '<a href="' + confirmUrl + '" style="background:#2fa37b;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✓ CONFIRM (paid)</a>' +
     '&nbsp;&nbsp;' +
