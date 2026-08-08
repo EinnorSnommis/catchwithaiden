@@ -29,8 +29,8 @@ var CONFIG = {
 
   // ── Money: replace the placeholders before going live ──
   PRICE: 30,                                    // dollars per lesson
-  ZELLE_PHONE: 'ZELLE_PHONE_PLACEHOLDER',       // e.g. '(336) 555-1234'
-  CASHTAG: 'CASHTAG_PLACEHOLDER',               // WITHOUT the $ , e.g. 'AidenSimmons'
+  ZELLE_PHONE: '(336) 508-2721',
+  CASHTAG: 'AidenSimmons07',                    // WITHOUT the $
 
   // ── Lesson details for the confirmation email ──
   LOCATION: 'LOCATION_PLACEHOLDER (field / cage address, Greensboro NC)',

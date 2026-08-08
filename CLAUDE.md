@@ -73,6 +73,10 @@ These look like mistakes but are deliberate:
    things a parent acts on — book buttons, available days, selected slots,
    submit, success. This split is deliberate and was Aiden's call, so a green
    heading or a blue Book button is a bug, not a refresh.
+   **One deliberate exception:** the offset slab behind the hero image
+   (`.poster-frame::after`) is green. The commitment graphic has its own blue
+   border, so a blue slab vanished behind it. It's purely decorative and
+   nothing clickable, so it doesn't muddy the green-means-action signal.
    The site was orange `#ff6a1a` (Southeast Guilford jersey) through
    2026-08-08; it moved to Robeson CC's colors when Aiden started college.
    The orange in the hero and about photos is his high-school jersey — that's
@@ -122,10 +126,12 @@ personal data back — only which slots are taken.
       still `REPLACE_WITH_APPS_SCRIPT_DEPLOYMENT_URL`, so the booking section
       shows a friendly "not connected yet" notice and the calendar is
       display-only. README steps 2–3 cover deployment.
-- [ ] **Placeholders to replace** once Aiden provides real values:
-      `ZELLE_PHONE_PLACEHOLDER` and `$CASHTAG_PLACEHOLDER` in `index.html`
-      (cashtag appears twice — text and the cash.app link), plus
-      `ZELLE_PHONE`, `CASHTAG`, and `LOCATION` in `Code.gs` CONFIG.
+- [x] Payment details are live: Zelle `(336) 508-2721`, Cash App
+      `$AidenSimmons07` (in `index.html` twice — card text and the cash.app
+      link — and in `Code.gs` CONFIG).
+- [ ] **`LOCATION_PLACEHOLDER` in `Code.gs`** — the only placeholder left. It's
+      the address printed in every confirmation email, so it must be real
+      before the first booking is approved.
 - [ ] Waiver text has not been reviewed by an attorney.
 
 ## If the Apps Script backend proves painful

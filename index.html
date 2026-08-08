@@ -316,7 +316,9 @@
   .poster-frame::after {
     content: "";
     position: absolute; inset: 0;
-    background: var(--blue);
+    /* Deliberately green: the commitment graphic has its own blue border, so a
+       blue slab behind it disappeared. Decorative only — see CLAUDE.md #1. */
+    background: var(--green);
     opacity: .9;
     transform: translate(12px, 12px);
     z-index: 0;
@@ -326,6 +328,9 @@
     z-index: 1;
     width: 100%;
     height: auto;
+    /* Separates the graphic's own blue/green edges from the slab behind it.
+       border-box keeps this from altering the image's aspect ratio. */
+    border: 3px solid var(--ink);
     filter: contrast(1.05) saturate(1.08);
   }
   .hero-facts {
@@ -1663,7 +1668,7 @@
         <h3><span>Zelle</span></h3>
         <span class="pay-badge">Bank to bank</span>
       </div>
-      <div class="pay-value" id="zelleNumber">ZELLE_PHONE_PLACEHOLDER</div>
+      <div class="pay-value" id="zelleNumber">(336) 508-2721</div>
       <div class="pay-actions">
         <button type="button" class="copy-btn" data-copy-target="zelleNumber">Copy number</button>
       </div>
@@ -1675,10 +1680,10 @@
         <h3><span>Cash App</span></h3>
         <span class="pay-badge">Tap to pay</span>
       </div>
-      <div class="pay-value" id="cashTag">$CASHTAG_PLACEHOLDER</div>
+      <div class="pay-value" id="cashTag">$AidenSimmons07</div>
       <div class="pay-actions">
         <button type="button" class="copy-btn" data-copy-target="cashTag">Copy cashtag</button>
-        <a class="pay-link" href="https://cash.app/$CASHTAG_PLACEHOLDER" target="_blank" rel="noopener">Pay on Cash App <span aria-hidden="true">→</span></a>
+        <a class="pay-link" href="https://cash.app/$AidenSimmons07" target="_blank" rel="noopener">Pay on Cash App <span aria-hidden="true">→</span></a>
       </div>
       <p class="hint">The Cash App link opens with the cashtag ready to go.</p>
     </div>
