@@ -2,7 +2,8 @@
  * ═══════════════════════════════════════════════════════════════════════════
  *  CATCH WITH AIDEN — Booking backend (Google Apps Script)
  *
- *  Deploy from Aiden's Google account (aidenjsimmons1@gmail.com):
+ *  Deploy from the business Google account (catchwithaiden@gmail.com) — its
+ *  Calendar holds the lessons and its Gmail sends the mail:
  *    script.google.com → New project → paste this file → Deploy →
  *    New deployment → Web app → Execute as "Me", access "Anyone" →
  *    copy the URL into BOOKING_API_URL in index.html.
@@ -34,6 +35,13 @@ var CONFIG = {
   // ── Lesson details for the confirmation email ──
   LOCATION: 'LOCATION_PLACEHOLDER (field / cage address, Greensboro NC)',
   WHAT_TO_BRING: "Catcher's gear if you have it, glove, cleats or turf shoes, and water.",
+
+  // ── Reply-to addresses (Porkbun forwards → the business Gmail) ──
+  // Mail still SENDS from the deploying Google account; these only control
+  // where a parent's reply lands, which needs no alias or SMTP setup.
+  // Both must exist as forwards in Porkbun or replies will bounce.
+  SCHEDULE_EMAIL: 'schedule@catchwithaiden.com',
+  QUESTIONS_EMAIL: 'questions@catchwithaiden.com',
 
   // ── Plumbing (usually leave alone) ──
   AIDEN_EMAIL: Session.getEffectiveUser().getEmail(),
@@ -333,8 +341,9 @@ function sendParentRequestEmail_(email, parent, player, date, time) {
     'you\'ll get another email with the location and what to bring.<br><br>' +
     'When you booked, you agreed to the Liability Waiver &amp; Release on behalf of your player — ' +
     'you can re-read it any time at <a href="https://catchwithaiden.com/#waiver">catchwithaiden.com</a>.<br><br>' +
-    'Questions? Text Aiden at (336) 508-2721.<br><br>— Catch With Aiden';
-  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body });
+    'Questions? Text Aiden at (336) 508-2721 or email ' +
+    '<a href="mailto:' + CONFIG.QUESTIONS_EMAIL + '">' + CONFIG.QUESTIONS_EMAIL + '</a>.<br><br>— Catch With Aiden';
+  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body, replyTo: CONFIG.SCHEDULE_EMAIL });
 }
 
 function sendAidenRequestEmail_(id, token, parent, player, age, phone, email, date, time) {
@@ -356,7 +365,9 @@ function sendAidenRequestEmail_(id, token, parent, player, age, phone, email, da
     '&nbsp;&nbsp;' +
     '<a href="' + declineUrl + '" style="background:#b84812;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✕ DECLINE</a>' +
     '<br><br>If no payment arrives, do nothing — the request expires on its own after ' + CONFIG.HOLD_HOURS + ' hours.';
-  MailApp.sendEmail({ to: CONFIG.AIDEN_EMAIL, subject: subject, htmlBody: body });
+  // Reply-to is the parent, not a business address — this email goes to Aiden,
+  // so hitting Reply should reach the family asking for the lesson.
+  MailApp.sendEmail({ to: CONFIG.AIDEN_EMAIL, subject: subject, htmlBody: body, replyTo: email });
 }
 
 function sendParentConfirmedEmail_(email, parent, player, date, time) {
@@ -368,9 +379,10 @@ function sendParentConfirmedEmail_(email, parent, player, date, time) {
     '<b>When:</b> ' + when + ' (30 minutes)<br>' +
     '<b>Where:</b> ' + esc_(CONFIG.LOCATION) + '<br>' +
     '<b>Bring:</b> ' + esc_(CONFIG.WHAT_TO_BRING) + '<br><br>' +
-    'Need to reschedule? Free with 24-hour notice — just text Aiden at (336) 508-2721.<br><br>' +
+    'Need to reschedule? Free with 24-hour notice — text Aiden at (336) 508-2721 ' +
+    'or just reply to this email.<br><br>' +
     'See you behind the plate!<br>— Catch With Aiden';
-  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body });
+  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body, replyTo: CONFIG.SCHEDULE_EMAIL });
 }
 
 function sendParentDeclinedEmail_(email, parent, player, date, time) {
@@ -382,7 +394,7 @@ function sendParentDeclinedEmail_(email, parent, player, date, time) {
     'so nothing has been charged or scheduled.<br><br>' +
     'Grab another time at <a href="https://catchwithaiden.com">catchwithaiden.com</a>, ' +
     'or text Aiden at (336) 508-2721 and he\'ll help you find one.<br><br>— Catch With Aiden';
-  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body });
+  MailApp.sendEmail({ to: email, subject: subject, htmlBody: body, replyTo: CONFIG.SCHEDULE_EMAIL });
 }
 
 /* ═══════════════ HELPERS ═══════════════ */

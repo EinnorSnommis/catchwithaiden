@@ -14,7 +14,11 @@ $30, ages 8–15, 1-on-1 only.
 - **Hosting:** GitHub Pages, `main` branch, root. Pushing to `main` publishes.
 - **Domain:** Porkbun DNS → four GitHub A records + `www` CNAME. Do not touch
   the MX/SPF records there; they're for Porkbun email forwarding.
-- Aiden's contact: aidenjsimmons1@gmail.com, (336) 508-2721
+- Business email: `catchwithaiden@gmail.com` (owns the Apps Script deployment,
+  Calendar, and bookings sheet). Public addresses `schedule@catchwithaiden.com`
+  and `questions@catchwithaiden.com` are Porkbun forwards into it. Aiden's
+  personal Gmail is deliberately not used anywhere in the business.
+- Aiden's phone: (336) 508-2721
 - His recruiting page (linked from the site): https://einnorsnommis.github.io/AidenSimmons2026/
 - **Two people.** Aiden (18, turns 19 on 2026-08-28) is the business owner — he
   teaches the lessons, holds the Google/payment accounts, and is "the owner" in
@@ -69,12 +73,20 @@ These look like mistakes but are deliberate:
    manual and pre-paid by design.
 5. **The liability waiver is required.** A parent cannot book without ticking
    it; the backend re-checks and records a timestamp. Don't make it optional.
+6. **Booking mail sends From: the Gmail address, not the custom domain.** This
+   looks unbranded and is meant to be. Gmail is already a trusted sender; a
+   `@catchwithaiden.com` From: sent through Apps Script without aligned
+   SPF/DKIM/DMARC gets filtered *harder*, and a parent who never sees the
+   payment instructions doesn't pay — the slot then expires in 12 hours. The
+   branding is carried by `replyTo` instead (`CONFIG.SCHEDULE_EMAIL` /
+   `QUESTIONS_EMAIL` in `Code.gs`), which needs no alias or SMTP. Changing the
+   From: means paid mailbox hosting and real DNS work, not a one-line edit.
 
 ## Booking architecture
 
 Static page can't hold state, so bookings run through a Google Apps Script web
-app deployed from **Aiden's** Google account (so events land on his calendar and
-mail comes from his Gmail).
+app deployed from the **`catchwithaiden@gmail.com`** account (so events land on
+the business calendar and mail comes from the business Gmail).
 
 Flow is **request → pre-pay → approve**:
 

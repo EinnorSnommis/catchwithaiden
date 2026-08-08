@@ -47,20 +47,20 @@ Everything you need to put the site live and take bookings. No coding required �
 
 ---
 
-## Step 2 — Deploy the booking backend (from Aiden's Google account)
+## Step 2 — Deploy the booking backend (from the business Google account)
 
-This must be done while signed in as **aidenjsimmons1@gmail.com** — that's whose Calendar and Gmail the bookings flow through.
+This must be done while signed in as **catchwithaiden@gmail.com** — that's whose Calendar and Gmail the bookings flow through. Don't use a personal Gmail: whichever account you deploy from owns the bookings spreadsheet, the calendar, and the From: address on every parent email, and moving it later means redoing the deployment.
 
-1. Go to [script.google.com](https://script.google.com) and sign in as Aiden.
+1. Go to [script.google.com](https://script.google.com) and sign in as **catchwithaiden@gmail.com**.
 2. Click **+ New project**.
 3. Delete the empty code in the editor and paste in the entire contents of `Code.gs` (open it in Notepad, Select All, Copy, Paste).
 4. **Before deploying, replace the placeholders** near the top of the file (see "Placeholders" below).
 5. Click the 💾 save icon, then **Deploy → New deployment**.
 6. Click the ⚙️ gear next to "Select type" → choose **Web app**.
 7. Set:
-   - **Execute as:** Me (aidenjsimmons1@gmail.com)
+   - **Execute as:** Me (catchwithaiden@gmail.com)
    - **Who has access:** Anyone
-8. Click **Deploy**. Google will ask for permission — click **Authorize access**, pick Aiden's account, click **Advanced → Go to (project name)** if it warns you, and **Allow**. (The warning appears because it's your own personal script, not a published app.)
+8. Click **Deploy**. Google will ask for permission — click **Authorize access**, pick the Catch With Aiden account, click **Advanced → Go to (project name)** if it warns you, and **Allow**. (The warning appears because it's your own personal script, not a published app.)
 9. Copy the **Web app URL** it gives you (it starts with `https://script.google.com/macros/s/...`).
 
 ### Paste the URL into the website
