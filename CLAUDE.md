@@ -16,6 +16,11 @@ $30, ages 8–15, 1-on-1 only.
   the MX/SPF records there; they're for Porkbun email forwarding.
 - Aiden's contact: aidenjsimmons1@gmail.com, (336) 508-2721
 - His recruiting page (linked from the site): https://einnorsnommis.github.io/AidenSimmons2026/
+- **Two people.** Aiden (18, turns 19 on 2026-08-28) is the business owner — he
+  teaches the lessons, holds the Google/payment accounts, and is "the owner" in
+  the decisions below. His father Ronnie does the technical build and is who
+  Claude sessions normally take direction from. When a decision is about how the
+  business runs — pricing, policy, what's on the page — it's Aiden's call.
 
 ## Files
 
