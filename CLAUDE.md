@@ -51,7 +51,15 @@ half-finished work — `main` is live.
 Source of truth is the original mockup's design language. Dark theme:
 
 - Background `#0b0b0c`, elevated `#131316`, borders `#2a2a30`
-- **Accent orange `#ff6a1a`** (Southeast Guilford jersey orange), hover `#ffa055`
+- **Robeson CC "Diamond Eagles" palette**, sampled from `images/hero.jpg`
+  (the athletics program is new and publishes no brand guide):
+  - `--blue #104e89` — RCC blue. **Fills only** — 2.3:1 on the background, so
+    it may never carry text, borders, or icons. White text on it is 8.4:1.
+  - `--blue-hi #3d8ad4` — the readable-on-dark tint (5.4:1). Everything blue
+    that isn't a fill uses this.
+  - `--green #5ea23e` / `--green-hi #7ac356` — 6.2:1.
+  - `--warn #d99a3c` — caution callouts only. Not a brand color; it exists so
+    warnings aren't green.
 - Text `#f5f1ea` warm off-white, muted `#7d7972`
 - Fonts: Bebas Neue (headlines), Barlow + Barlow Condensed (body/labels),
   DM Mono (small technical text)
@@ -60,9 +68,15 @@ Source of truth is the original mockup's design language. Dark theme:
 
 These look like mistakes but are deliberate:
 
-1. **Orange, not red/gold.** The original build prompt described the palette as
-   red `#e63946` / gold `#f4a261`, but the actual mockup uses orange `#ff6a1a`
-   and contains no red or gold. The mockup won.
+1. **Blue = structure, green = action. Never mix the roles.** Blue carries
+   navigation, headings, rules, borders and card chrome; green is reserved for
+   things a parent acts on — book buttons, available days, selected slots,
+   submit, success. This split is deliberate and was Aiden's call, so a green
+   heading or a blue Book button is a bug, not a refresh.
+   The site was orange `#ff6a1a` (Southeast Guilford jersey) through
+   2026-08-08; it moved to Robeson CC's colors when Aiden started college.
+   The orange in the hero and about photos is his high-school jersey — that's
+   history, not a palette leak, and the photos stay as they are.
 2. **No hero stats** (pop time, height, handedness, GPA), **no group clinics**,
    **no video review feature.** All intentionally cut from the spec.
 3. **Images are never cropped.** All three photos render at their natural

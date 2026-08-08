@@ -361,9 +361,9 @@ function sendAidenRequestEmail_(id, token, parent, player, age, phone, email, da
     'When: <b>' + when + '</b> · $' + CONFIG.PRICE + '<br>' +
     'Waiver: <b>agreed at booking</b> (timestamp recorded in the Bookings sheet)<br><br>' +
     'Wait for the Zelle / Cash App notification, then:<br><br>' +
-    '<a href="' + confirmUrl + '" style="background:#2fa37b;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✓ CONFIRM (paid)</a>' +
+    '<a href="' + confirmUrl + '" style="background:#5ea23e;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✓ CONFIRM (paid)</a>' +
     '&nbsp;&nbsp;' +
-    '<a href="' + declineUrl + '" style="background:#b84812;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✕ DECLINE</a>' +
+    '<a href="' + declineUrl + '" style="background:#b23b3b;color:#fff;padding:12px 24px;text-decoration:none;font-weight:bold;display:inline-block;">✕ DECLINE</a>' +
     '<br><br>If no payment arrives, do nothing — the request expires on its own after ' + CONFIG.HOLD_HOURS + ' hours.';
   // Reply-to is the parent, not a business address — this email goes to Aiden,
   // so hitting Reply should reach the family asking for the lesson.
@@ -436,7 +436,7 @@ function jsonOut_(obj) {
 }
 
 function htmlPage_(mark, title, detail) {
-  var color = mark === '✓' ? '#2fa37b' : '#b84812';
+  var color = mark === '✓' ? '#5ea23e' : '#b23b3b';   // RCC green / neutral red
   var html =
     '<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1">' +
     '<title>' + esc_(title) + '</title></head>' +

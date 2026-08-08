@@ -14,7 +14,7 @@
 <meta property="og:description" content="1-on-1 catching lessons in Greensboro, NC. Receiving, blocking, throwing footwork, and game IQ for youth catchers ages 8–15. Book online.">
 <meta property="og:image" content="https://catchwithaiden.com/images/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0c'/%3E%3Crect x='8' y='8' width='48' height='48' fill='none' stroke='%23ff6a1a' stroke-width='4' transform='rotate(-6 32 32)'/%3E%3Ctext x='32' y='45' font-family='Arial Black,Arial,sans-serif' font-size='34' font-weight='900' fill='%23ff6a1a' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230b0b0c'/%3E%3Crect x='8' y='8' width='48' height='48' fill='none' stroke='%233d8ad4' stroke-width='4' transform='rotate(-6 32 32)'/%3E%3Ctext x='32' y='45' font-family='Arial Black,Arial,sans-serif' font-size='34' font-weight='900' fill='%233d8ad4' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Barlow+Condensed:wght@500;600;700;800&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -32,13 +32,19 @@
     --muted:     #7d7972;
     --muted-2:   #565353;
 
-    --orange:    #ff6a1a;     /* Southeast Guilford jersey orange */
-    --orange-hi: #ffa055;
-    --orange-dk: #b84812;
-    --orange-tr: rgba(255,106,26,.12);
+    /* Robeson CC "Diamond Eagles", sampled from images/hero.jpg.
+       Blue carries structure + navigation; green is reserved for action.
+       --blue is too dark for text on --bg (2.3:1), so it only ever fills
+       behind light text; --blue-hi is the readable-on-dark tint (5.4:1). */
+    --blue:      #104e89;     /* RCC blue — fills, slabs, badges */
+    --blue-hi:   #3d8ad4;     /* text, marks, borders on the dark bg */
 
-    --green:     #2fa37b;
-    --green-tr:  rgba(47,163,123,.12);
+    --green:     #5ea23e;     /* RCC green — CTAs, availability, success */
+    --green-hi:  #7ac356;
+    --green-tr:  rgba(94,162,62,.12);
+
+    --warn:      #d99a3c;     /* caution callouts only — not a brand color */
+    --warn-tr:   rgba(217,154,60,.12);
 
     --red:       #e05252;
     --red-tr:    rgba(224,82,82,.12);
@@ -66,13 +72,13 @@
     font-feature-settings: "ss01", "ss02";
   }
 
-  ::selection { background: var(--orange); color: #fff; }
+  ::selection { background: var(--blue); color: #fff; }
 
   img { display: block; max-width: 100%; }
   a { color: inherit; }
 
   :focus-visible {
-    outline: 2px solid var(--orange);
+    outline: 2px solid var(--green);
     outline-offset: 2px;
   }
 
@@ -114,8 +120,8 @@
   }
   .brand .mark {
     width: 38px; height: 38px;
-    border: 2px solid var(--orange);
-    color: var(--orange);
+    border: 2px solid var(--blue-hi);
+    color: var(--blue-hi);
     display: grid; place-items: center;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 18px;
@@ -125,7 +131,7 @@
   .brand .mark::after {
     content: "";
     position: absolute; inset: -6px;
-    border: 1px dashed rgba(255,106,26,.35);
+    border: 1px dashed rgba(61,138,212,.35);
     transform: rotate(6deg);
   }
   .brand .name { line-height: 1; }
@@ -152,14 +158,14 @@
     position: relative;
     padding: 12px 0;
   }
-  .nav-links a:hover { color: var(--orange); }
+  .nav-links a:hover { color: var(--blue-hi); }
   .nav-links a.cta {
-    background: var(--orange);
+    background: var(--green);
     color: #fff;
     padding: 13px 18px;
     transition: background .2s;
   }
-  .nav-links a.cta:hover { background: var(--orange-hi); color: var(--bg); }
+  .nav-links a.cta:hover { background: var(--green-hi); color: var(--bg); }
   @media (max-width: 760px) {
     .topbar { padding: 12px 16px; }
     .nav-links { gap: 16px; }
@@ -194,11 +200,11 @@
     font-size: 12px;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--blue-hi);
     margin-bottom: 28px;
   }
   .eyebrow::before {
-    content: ""; width: 36px; height: 1px; background: var(--orange);
+    content: ""; width: 36px; height: 1px; background: var(--blue-hi);
   }
 
   .hero h1 {
@@ -223,7 +229,7 @@
     margin: 0 .18em;
   }
   .hero h1 .name {
-    color: var(--orange);
+    color: var(--blue-hi);
     position: relative;
     display: inline-block;
   }
@@ -232,7 +238,7 @@
     position: absolute;
     left: -6px; right: -6px; bottom: 6px;
     height: 14px;
-    background: var(--orange);
+    background: var(--blue-hi);
     opacity: .12;
     z-index: -1;
     transform: skewX(-12deg);
@@ -268,7 +274,7 @@
     min-height: 48px;
   }
   .btn-primary {
-    background: var(--orange);
+    background: var(--green);
     color: #fff;
   }
   .btn-primary:hover {
@@ -283,7 +289,7 @@
     color: var(--ink);
     border: 1px solid var(--line);
   }
-  .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); }
 
   /* hero photo side — framed poster + lesson facts */
   .hero-photo {
@@ -303,14 +309,14 @@
   .poster-frame::before {
     content: "";
     position: absolute; inset: -12px;
-    border: 1px dashed rgba(255,106,26,.4);
+    border: 1px dashed rgba(61,138,212,.4);
     transform: rotate(1.6deg);
     pointer-events: none;
   }
   .poster-frame::after {
     content: "";
     position: absolute; inset: 0;
-    background: var(--orange);
+    background: var(--blue);
     opacity: .9;
     transform: translate(12px, 12px);
     z-index: 0;
@@ -345,7 +351,7 @@
   .hero-facts li::before {
     content: "";
     width: 5px; height: 5px;
-    background: var(--orange);
+    background: var(--blue-hi);
   }
   @media (max-width: 880px) {
     .hero-photo { padding: 0 32px 48px; }
@@ -386,7 +392,7 @@
   .ticker span { color: var(--ink); display: inline-flex; align-items: center; gap: 32px; }
   .ticker span::after {
     content: "✦";
-    color: var(--orange);
+    color: var(--blue-hi);
     font-size: 18px;
   }
   @keyframes scroll {
@@ -420,7 +426,7 @@
   .about-photo .tag {
     position: absolute; top: 56px; left: 56px;
     background: var(--bg);
-    color: var(--orange);
+    color: var(--blue-hi);
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 11px;
     letter-spacing: 4px;
@@ -448,7 +454,7 @@
     font-family: 'Barlow', sans-serif;
     font-style: italic;
     font-weight: 300;
-    color: var(--orange);
+    color: var(--blue-hi);
   }
   .about-copy p {
     font-size: 17px;
@@ -527,7 +533,7 @@
     text-align: right;
     line-height: 1.7;
   }
-  .section-header .meta b { color: var(--orange); font-weight: 700; }
+  .section-header .meta b { color: var(--blue-hi); font-weight: 700; }
   @media (max-width: 700px) {
     .section-header { grid-template-columns: auto 1fr; gap: 18px; }
     .section-header .meta { display: none; }
@@ -549,7 +555,7 @@
     position: relative;
     transition: transform .25s ease, border-color .25s ease;
   }
-  .skill-card:hover { transform: translateY(-4px); border-color: var(--orange); }
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--blue-hi); }
   .skill-card .idx {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -564,7 +570,7 @@
     letter-spacing: 1px;
     margin: 0 0 12px;
   }
-  .skill-card h3 span { color: var(--orange); }
+  .skill-card h3 span { color: var(--blue-hi); }
   .skill-card p {
     margin: 0;
     font-size: 14px;
@@ -576,24 +582,24 @@
     position: absolute;
     left: 24px; top: 0;
     width: 44px; height: 3px;
-    background: var(--orange);
+    background: var(--blue-hi);
   }
 
   /* ─── LESSON & PRICING ─── */
   .lesson-wrap { max-width: 520px; margin: 0 auto; }
   .lesson-card {
     background: var(--bg-elev);
-    border: 1px solid var(--orange);
+    border: 1px solid var(--blue-hi);
     position: relative;
     overflow: hidden;
     display: flex; flex-direction: column;
-    background: linear-gradient(180deg, rgba(255,106,26,.06), transparent 30%), var(--bg-elev);
+    background: linear-gradient(180deg, rgba(61,138,212,.06), transparent 30%), var(--bg-elev);
   }
   .lesson-card::before {
     content: "1-ON-1 ONLY";
     position: absolute;
     top: 16px; right: 16px;
-    background: var(--orange);
+    background: var(--blue);
     color: #fff;
     font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
@@ -627,11 +633,11 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--orange);
+    color: var(--blue-hi);
     display: flex; align-items: center; gap: 8px;
   }
   .lesson-photo .type::before {
-    content: ""; width: 6px; height: 6px; background: var(--orange); border-radius: 50%;
+    content: ""; width: 6px; height: 6px; background: var(--blue-hi); border-radius: 50%;
   }
   .lesson-body {
     padding: 24px 24px 26px;
@@ -668,7 +674,7 @@
     content: "";
     flex: none;
     width: 5px; height: 5px;
-    background: var(--orange);
+    background: var(--blue-hi);
     margin-top: 8px;
   }
   .lesson-foot {
@@ -709,7 +715,7 @@
     text-decoration: none;
     min-height: 44px;
   }
-  .lesson-book:hover { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .lesson-book:hover { background: var(--green); border-color: var(--green); color: #fff; }
 
   /* ─── BOOKING / SCHEDULE ─── */
   .schedule {
@@ -763,7 +769,7 @@
     line-height: 1;
     transition: all .2s;
   }
-  .cal-nav button:hover:not(:disabled) { border-color: var(--orange); color: var(--orange); }
+  .cal-nav button:hover:not(:disabled) { border-color: var(--blue-hi); color: var(--blue-hi); }
   .cal-nav button:disabled { opacity: .3; cursor: default; }
 
   .cal-grid {
@@ -799,7 +805,7 @@
   .cal-day.in-month { color: var(--ink-soft); opacity: .45; }
   .cal-day.available {
     color: var(--ink);
-    background: var(--orange-tr);
+    background: var(--green-tr);
     cursor: pointer;
     opacity: 1;
   }
@@ -807,12 +813,12 @@
     content: ""; position: absolute;
     bottom: 5px; left: 50%; transform: translateX(-50%);
     width: 4px; height: 4px;
-    background: var(--orange);
+    background: var(--green);
     border-radius: 50%;
   }
-  .cal-day.available:hover { background: rgba(255,106,26,.22); }
+  .cal-day.available:hover { background: rgba(94,162,62,.22); }
   .cal-day.selected {
-    background: var(--orange);
+    background: var(--green);
     color: #fff;
     font-weight: 700;
     opacity: 1;
@@ -856,10 +862,10 @@
     width: 100%;
     min-height: 48px;
   }
-  .slot:hover:not(.taken) { border-color: var(--orange); }
+  .slot:hover:not(.taken) { border-color: var(--green); }
   .slot.selected {
-    border-color: var(--orange);
-    background: var(--orange-tr);
+    border-color: var(--green);
+    background: var(--green-tr);
   }
   .slot.taken { cursor: not-allowed; opacity: .55; }
   .slot.taken .time { text-decoration: line-through; }
@@ -873,7 +879,7 @@
   }
   .slot.available .status { color: var(--green); }
   .slot.taken .status { color: var(--muted); }
-  .slot.selected .status { color: var(--orange); }
+  .slot.selected .status { color: var(--green); }
   .slots-empty {
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -941,7 +947,7 @@
     transition: border-color .2s;
     min-height: 48px;
   }
-  .field input:focus { border-color: var(--orange); }
+  .field input:focus { border-color: var(--green); }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; gap: 0; } }
   .field-row-3 { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
@@ -962,7 +968,7 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--orange);
+    color: var(--blue-hi);
     display: flex; align-items: center; gap: 8px;
     min-height: 32px;
   }
@@ -998,7 +1004,7 @@
     flex: none;
     width: 22px; height: 22px;
     margin: 1px 0 0;
-    accent-color: var(--orange);
+    accent-color: var(--green);
     cursor: pointer;
   }
   .waiver-agree b { color: var(--ink); }
@@ -1016,7 +1022,7 @@
     margin-top: 8px;
     width: 100%;
     padding: 18px;
-    background: var(--orange);
+    background: var(--green);
     color: #fff;
     border: none;
     font-family: 'Barlow Condensed', sans-serif;
@@ -1056,7 +1062,7 @@
   .book-msg.show { display: block; }
   .book-msg.ok {
     background: var(--green-tr);
-    border: 1px solid rgba(47,163,123,.3);
+    border: 1px solid rgba(94,162,62,.3);
     color: var(--green);
   }
   .book-msg.err {
@@ -1065,16 +1071,16 @@
     color: var(--red);
   }
   .book-msg.warn {
-    background: var(--orange-tr);
-    border: 1px solid rgba(255,106,26,.3);
-    color: var(--orange-hi);
+    background: var(--warn-tr);
+    border: 1px solid rgba(217,154,60,.3);
+    color: var(--warn);
   }
   .book-msg a { color: inherit; }
 
   /* success confirmation card */
   .confirm-card {
     display: none;
-    border: 1px solid rgba(47,163,123,.3);
+    border: 1px solid rgba(94,162,62,.3);
     background: var(--bg);
     padding: 44px 32px;
     text-align: center;
@@ -1109,9 +1115,9 @@
     margin-top: 16px;
     font-family: 'DM Mono', monospace;
     font-size: 12px;
-    color: var(--orange);
+    color: var(--green);
     letter-spacing: 1px;
-    border: 1px dashed rgba(255,106,26,.4);
+    border: 1px dashed rgba(94,162,62,.4);
     padding: 10px 16px;
   }
 
@@ -1132,7 +1138,7 @@
   .pay-step .n {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 40px;
-    color: var(--orange);
+    color: var(--blue-hi);
     line-height: 1;
     margin-bottom: 12px;
   }
@@ -1222,9 +1228,9 @@
   }
   .pay-important {
     margin-top: 18px;
-    background: var(--orange-tr);
-    border: 1px solid rgba(255,106,26,.3);
-    color: var(--orange-hi);
+    background: var(--warn-tr);
+    border: 1px solid rgba(217,154,60,.3);
+    color: var(--warn);
     padding: 14px 18px;
     font-family: 'DM Mono', monospace;
     font-size: 12px;
@@ -1239,7 +1245,7 @@
     background: var(--bg-elev);
     margin-bottom: 10px;
   }
-  .faq-list details[open] { border-color: var(--orange); }
+  .faq-list details[open] { border-color: var(--blue-hi); }
   .faq-list summary {
     list-style: none;
     cursor: pointer;
@@ -1255,12 +1261,12 @@
     transition: color .2s;
   }
   .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary:hover { color: var(--orange); }
+  .faq-list summary:hover { color: var(--blue-hi); }
   .faq-list summary::after {
     content: "+";
     font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
-    color: var(--orange);
+    color: var(--blue-hi);
     flex: none;
     transition: transform .2s;
   }
@@ -1286,7 +1292,7 @@
     content: "";
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(255,106,26,.08) 0%, transparent 60%);
+      radial-gradient(ellipse at 50% 0%, rgba(61,138,212,.08) 0%, transparent 60%);
     pointer-events: none;
   }
   .outro h2 {
@@ -1297,7 +1303,7 @@
     letter-spacing: 1px;
     text-wrap: balance;
   }
-  .outro h2 .em { color: var(--orange); font-style: italic; font-family: 'Barlow', sans-serif; font-weight: 300; }
+  .outro h2 .em { color: var(--blue-hi); font-style: italic; font-family: 'Barlow', sans-serif; font-weight: 300; }
   .outro p {
     color: var(--ink-soft);
     max-width: 540px;
@@ -1327,11 +1333,11 @@
     letter-spacing: 2px;
     color: var(--ink);
   }
-  footer .center b { color: var(--orange); font-weight: 400; }
+  footer .center b { color: var(--blue-hi); font-weight: 400; }
   footer .left { line-height: 2; }
   footer .right { text-align: right; display: flex; gap: 18px; justify-content: flex-end; flex-wrap: wrap; }
   footer a { color: var(--muted); text-decoration: none; transition: color .2s; padding: 8px 0; display: inline-block; }
-  footer a:hover { color: var(--orange); }
+  footer a:hover { color: var(--blue-hi); }
   @media (max-width: 700px) {
     footer { grid-template-columns: 1fr; text-align: center; padding: 36px 24px; }
     footer .right { justify-content: center; }
@@ -1511,7 +1517,7 @@
     </div>
 
     <noscript>
-      <p style="font-family:'DM Mono',monospace;font-size:13px;color:var(--orange-hi);border:1px solid rgba(255,106,26,.3);padding:14px 18px;background:var(--orange-tr);">
+      <p style="font-family:'DM Mono',monospace;font-size:13px;color:var(--warn);border:1px solid rgba(217,154,60,.3);padding:14px 18px;background:var(--warn-tr);">
         The booking calendar needs JavaScript. To book without it, text Aiden at (336) 508-2721.
       </p>
     </noscript>
