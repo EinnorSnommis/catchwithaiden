@@ -86,9 +86,14 @@ These look like mistakes but are deliberate:
 3. **Images are never cropped.** All three photos render at their natural
    aspect ratio — no `object-fit: cover`, no fixed `aspect-ratio` on their
    containers. The owner asked for this specifically.
-4. **Zelle / Cash App, not Stripe.** Card processing means ~$1.17 in fees on a
-   $30 lesson, and Stripe requires the account holder to be 18. Payment is
-   manual and pre-paid by design.
+4. **Zelle / Cash App only.** Card processing means ~$1.17 in fees on a $30
+   lesson. Payment is manual and pre-paid by design.
+   (The original second reason — Stripe requiring the account holder to be 18 —
+   expired when Aiden turned 18; the fee argument is what still holds.)
+   **Venmo was proposed and declined on 2026-08-08.** Two payment methods is
+   the deliberate set, not an oversight — don't suggest adding a third. If it
+   is ever revisited, note that Venmo's feed is public by default, and the
+   payment note the site asks for contains a child's name and lesson date.
 5. **The liability waiver is required.** A parent cannot book without ticking
    it; the backend re-checks and records a timestamp. Don't make it optional.
 6. **Booking mail sends From: the Gmail address, not the custom domain.** This
